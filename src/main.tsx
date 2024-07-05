@@ -1,9 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import AppLayout from './layout/components/AppLayout'
+import AppRoutes from './routes/AppRoutes'
+import { GlobalStyles } from './styles/GlobalStyles'
+import { ThemeProvider } from 'styled-components'
+import { theme } from './styles/theme'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <AppLayout />
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <AppRoutes />
+    </ThemeProvider>
   </React.StrictMode>,
 )

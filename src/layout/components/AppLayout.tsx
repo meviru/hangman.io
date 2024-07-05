@@ -1,6 +1,4 @@
-import styled, { ThemeProvider } from "styled-components";
-import { GlobalStyles } from "../../styles/GlobalStyles"
-import { theme } from "../../styles/theme";
+import styled from "styled-components";
 import { useState } from "react";
 import Keyboard from "../../core/components/Keyboard";
 import GameBoard from "../../core/components/GameBoard";
@@ -16,7 +14,7 @@ const Container = styled.div`
 
 const AppLayout = () => {
     const word = 'United America';
-    const missingLetters = ['t', 'e', 'a'];
+    const missingLetters = ['n', 'a', 'd'];
 
     const [guessedLetters, setGuessedLetters] = useState<any>([]);
     const [incorrectGuesses, setIncorrectGuesses] = useState<any>([]);
@@ -40,20 +38,16 @@ const AppLayout = () => {
     const isGameLost = incorrectGuesses.length >= maxGuesses;
     const progress = incorrectGuesses.length === 0 ? 0 : (incorrectGuesses.length / maxGuesses) * 100;
 
-
     return <>
-        <ThemeProvider theme={theme}>
-            <GlobalStyles />
-            <Container>
-                <Header progress={progress} />
-                <GameBoard word={word} guessedLetters={guessedLetters} missingLetters={missingLetters} />
-                <Keyboard keyboard={keyboard} handleGuess={handleGuess} guessedLetters={guessedLetters} incorrectGuesses={incorrectGuesses} />
-                <div style={{ marginTop: "50px", textAlign: "center" }}>
-                    {isGameWon && <span>Congratulations! You won!</span>}
-                    {isGameLost && <span>Game Over! The word was "{word}".</span>}
-                </div>
-            </Container>
-        </ThemeProvider>
+        <Container>
+            <Header progress={progress} />
+            <GameBoard word={word} guessedLetters={guessedLetters} missingLetters={missingLetters} />
+            <Keyboard keyboard={keyboard} handleGuess={handleGuess} guessedLetters={guessedLetters} incorrectGuesses={incorrectGuesses} />
+            <div style={{ marginTop: "50px", textAlign: "center" }}>
+                {isGameWon && <span>Congratulations! You won!</span>}
+                {isGameLost && <span>Game Over! The word was "{word}".</span>}
+            </div>
+        </Container>
     </>
 }
 

@@ -69,9 +69,9 @@ const ProgressWrapper = styled.div`
     background-color: ${({ theme }) => theme.white};
 `
 
-const ProgressBar = styled.div`
+const ProgressBar = styled.div<{ width?: number }>`
     height: 12px;
-    width: 0;
+    width: ${props => props.width}%;
     border-radius: 25px;
     background-color: ${({ theme }) => theme.darkText};
 `
@@ -91,7 +91,7 @@ const Header = ({ progress }: { progress: number }) => {
 
         <GameStatus>
             <ProgressWrapper>
-                <ProgressBar style={{ width: `${progress}%` }} />
+                <ProgressBar width={progress} />
             </ProgressWrapper>
             <Heart>
                 <svg width="55px" height="55px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
