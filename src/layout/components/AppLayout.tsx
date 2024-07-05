@@ -4,6 +4,7 @@ import { theme } from "../../styles/theme";
 import { useState } from "react";
 import Keyboard from "../../core/components/Keyboard";
 import GameBoard from "../../core/components/GameBoard";
+import Header from "../../core/components/Header";
 
 const Container = styled.div`
     width: 100%;
@@ -37,21 +38,17 @@ const AppLayout = () => {
 
     const isGameWon = word.split('').every((letter) => guessedLetters.includes(letter.toLowerCase()) || !missingLetters.includes(letter.toLowerCase()));
     const isGameLost = incorrectGuesses.length >= maxGuesses;
+    const progress = incorrectGuesses.length === 0 ? 0 : (incorrectGuesses.length / maxGuesses) * 100;
 
 
     return <>
         <ThemeProvider theme={theme}>
             <GlobalStyles />
             <Container>
+                <Header progress={progress} />
                 <GameBoard word={word} guessedLetters={guessedLetters} missingLetters={missingLetters} />
                 <Keyboard keyboard={keyboard} handleGuess={handleGuess} guessedLetters={guessedLetters} incorrectGuesses={incorrectGuesses} />
                 <div style={{ marginTop: "50px", textAlign: "center" }}>
-                    <div>
-                        Incorrect Guesses: {incorrectGuesses.join(', ')}
-                    </div>
-                    <div>
-                        Remaining Guesses: {maxGuesses - incorrectGuesses.length}
-                    </div>
                     {isGameWon && <span>Congratulations! You won!</span>}
                     {isGameLost && <span>Game Over! The word was "{word}".</span>}
                 </div>

@@ -2,24 +2,26 @@ import styled from "styled-components";
 
 const BoardWrapper = styled.div`
     display: flex;
-    gap: 20px;
+    gap: 10px 20px;
     flex-wrap: wrap;
-    padding: 90px 0;
+    padding: 70px 0;
     justify-content: center;
 `
 
 const LetterTile = styled.div`
      position: relative;
-     width: 108px;
-     height: 124px;
-     font-size: 100px;
-     text-align: center;
+     width: 98px;
+     height: 114px;
+     font-size: 90px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
      color: ${({ theme }) => theme.lightText};
-     border-radius: 40px;
+     border-radius: 35px;
      text-transform: uppercase;
-     text-shadow: 1px 1px 1px #444;
+     text-shadow: 1px 1px 1px  ${({ theme }) => theme.black};
      background-color: ${({ theme }) => theme.primary};
-     box-shadow: inset 4px 5px 2px rgba(255, 255, 255, 0.15), inset -4px 5px 2px rgba(255, 255, 255, 0.15), 0 0 2px 4px ${({ theme }) => theme.darkBlue};
+     box-shadow: inset 4px 5px 2px rgba(255, 255, 255, 0.15), inset -4px 5px 2px rgba(255, 255, 255, 0.15), 0 0 2px 3px ${({ theme }) => theme.darkBlue};
      &.blank {
         opacity: 0.4;
      }

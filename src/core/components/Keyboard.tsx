@@ -3,20 +3,20 @@ import styled from "styled-components";
 const KeyWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 28px 20px;
 `
 
 const Key = styled.button`
     position: relative;
-    width: 114px;
-    height: 84px;
+    width: 102px;
+    height: 74px;
     cursor: pointer;
-    font-size: 60px;
+    font-size: 55px;
     text-transform: uppercase;
     color: ${({ theme }) => theme.darkText};
     text-align: center;
     border-radius: 25px;
-    background-color: #fff;
+    background-color: ${({ theme }) => theme.white};
     &::after {
         position: absolute;
         content: "";
