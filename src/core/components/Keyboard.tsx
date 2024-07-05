@@ -12,6 +12,7 @@ const Key = styled.button`
     height: 84px;
     cursor: pointer;
     font-size: 60px;
+    text-transform: uppercase;
     color: ${({ theme }) => theme.darkText};
     text-align: center;
     border-radius: 25px;
@@ -38,7 +39,7 @@ const Key = styled.button`
 const Keyboard = ({ keyboard, handleGuess, guessedLetters, incorrectGuesses }: { keyboard: string[], handleGuess: any, guessedLetters: any, incorrectGuesses: any }) => {
     return <KeyWrapper>
         {keyboard.map((letter) => (
-            <Key key={letter} onClick={() => handleGuess(letter)} disabled={guessedLetters.includes(letter) || incorrectGuesses.includes(letter)}>
+            <Key key={letter} onClick={() => handleGuess(letter.toLowerCase())} disabled={guessedLetters.includes(letter.toLowerCase()) || incorrectGuesses.includes(letter.toLowerCase())}>
                 {letter}
             </Key>
         ))}

@@ -25,14 +25,20 @@ const LetterTile = styled.div`
      }
 `
 
+const LineBreak = styled.div`
+    flex: 0 0 100%;
+`
+
 const GameBoard = ({ word, guessedLetters, missingLetters }: { word: any, guessedLetters: any, missingLetters: any }) => {
 
     const renderWord = () => {
-        return word.split('').map((letter: any, index: number) =>
-            guessedLetters.includes(letter.toLowerCase()) || !missingLetters.includes(letter.toLowerCase()) ? (
-                <LetterTile key={index}>{letter} </LetterTile>
+        return word.split('').map((letter: string, index: number) =>
+            letter === ' ' ? (
+                <LineBreak key={index} />
+            ) : guessedLetters.includes(letter.toLowerCase()) || !missingLetters.includes(letter.toLowerCase()) ? (
+                <LetterTile key={index}>{letter}</LetterTile>
             ) : (
-                <LetterTile key={index}></LetterTile>
+                <LetterTile key={index}> </LetterTile>
             )
         );
     };

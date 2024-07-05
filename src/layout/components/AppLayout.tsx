@@ -14,8 +14,9 @@ const Container = styled.div`
 `
 
 const AppLayout = () => {
-    const word = 'United';
-    const missingLetters = ['t', 'e'];
+    const word = 'United America';
+    const missingLetters = ['t', 'e', 'a'];
+
     const [guessedLetters, setGuessedLetters] = useState<any>([]);
     const [incorrectGuesses, setIncorrectGuesses] = useState<any>([]);
     const maxGuesses = 8;
