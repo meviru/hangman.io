@@ -23,8 +23,7 @@ const HeaderToggleBtn = styled.div`
     border-radius: 50%;
     align-items: center;
     justify-content: center;
-    background: ${({ theme }) => theme.accent};
-    background: linear-gradient(0deg, ${({ theme }) => theme.accent2} 0%, ${({ theme }) => theme.accent} 70%);
+    background: ${({ theme }) => theme.gradientBg};
     box-shadow: inset 4px -10px 2px rgba(0, 0, 0, 0.15), inset -4px -10px 2px rgba(0, 0, 0, 0.15);
 `
 
@@ -98,8 +97,8 @@ const Header = ({ progress }: { progress: number }) => {
                 <svg width="55px" height="55px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <linearGradient gradientTransform="rotate(90)" id="gradient">
-                            <stop offset="40%" stop-color="#F573FE" />
-                            <stop offset="80%" stop-color="#897FFC" />
+                            <stop offset="40%" stopColor="#F573FE" />
+                            <stop offset="80%" stopColor="#897FFC" />
                         </linearGradient>
                     </defs>
                     <path fill="url(#gradient)" d="M2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5C13 20.5 14 19.7294 15.0383 18.9109C17.9806 16.5914 22 14 22 9.1371C22 4.27416 16.4998 0.825464 12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371Z" />

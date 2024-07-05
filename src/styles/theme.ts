@@ -9,4 +9,5 @@ export const theme = {
     accent2: "#897FFC",
     darkText: "#1b2b65",
     lightText: "#FFFFFF",
+    gradientBg: `linear-gradient(0deg, #897FFC 0%, #F573FE 70%)`
 }
