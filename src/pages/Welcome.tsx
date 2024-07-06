@@ -26,12 +26,14 @@ const BoxWrapper = styled.div`
 
 const LogoWrapper = styled.div`
   width: 100%;
+  height: 176px;
   max-width: 300px;
   margin: -100px auto 0;
 `;
 
 const Logo = styled.img`
   display: block;
+  object-fit: contain;
 `;
 
 const PlayButton = styled.div`
