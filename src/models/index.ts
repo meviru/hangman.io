@@ -1,8 +1,14 @@
 import { ReactNode } from "react";
 
 export interface ModalProps {
-    isOpen: boolean;
-    children: ReactNode;
-    onClose: () => void;
-    hideOverlay?: boolean;
+  isOpen: boolean;
+  children: ReactNode;
+  onClose: () => void;
+  hideOverlay?: boolean;
+}
+
+export interface ICategory {
+  id: number;
+  name: string;
+  words: string[];
 }

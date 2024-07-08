@@ -48,6 +48,7 @@ const TopbarIcon = styled.div`
 const TopbarTitle = styled.div`
   font-size: 70px;
   font-weight: normal;
+  filter: drop-shadow(3px 4px 0px ${({ theme }) => theme.darkBlue});
 `;
 
 const Topbar = ({

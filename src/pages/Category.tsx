@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import Topbar from "../shared/components/Topbar";
 import { Container } from "../styles/GlobalStyles";
+import { useEffect, useState } from "react";
+import { ICategory } from "../models";
+import getCategories from "../services/HangmanService";
+import { useNavigate } from "react-router-dom";
 
 const CategoryList = styled.ul`
   display: grid;
@@ -38,15 +42,42 @@ const CategoryItem = styled.li`
 `;
 
 const Category = () => {
+  const [categories, setCategories] = useState<ICategory[]>([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getCategories()
+      .then((response) => {
+        setCategories(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  const redirectToGame = (id: number, name: string) => {
+    const selectedCategory = categories.find((category) => category.id === id);
+    localStorage.setItem("words", JSON.stringify(selectedCategory?.words));
+    localStorage.setItem("categoryTitle", name);
+    const path = name.split(" ").join("-").toLowerCase();
+    navigate(path);
+  };
+
   return (
     <>
       <Container>
         <Topbar title="Pick a Category" isBackBtnVisible={true} />
         <CategoryList>
-          <CategoryItem>Movies</CategoryItem>
-          <CategoryItem>TV Shows</CategoryItem>
-          <CategoryItem>Countries</CategoryItem>
-          <CategoryItem>Capital Cities</CategoryItem>
+          {categories &&
+            categories.length > 0 &&
+            categories.map((category) => (
+              <CategoryItem
+                key={category.id}
+                onClick={() => redirectToGame(category.id, category.name)}
+              >
+                {category.name}
+              </CategoryItem>
+            ))}
         </CategoryList>
       </Container>
     </>
