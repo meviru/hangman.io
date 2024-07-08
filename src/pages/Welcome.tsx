@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import siteLogo from "/logo.svg";
 import iconPlay from "/play-alt-svgrepo-com.svg";
+import { useNavigate } from "react-router-dom";
 
 const WelcomeWrapper = styled.div`
   display: flex;
@@ -34,6 +35,7 @@ const LogoWrapper = styled.div`
 const Logo = styled.img`
   display: block;
   object-fit: contain;
+  filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
 `;
 
 const PlayButton = styled.div`
@@ -60,6 +62,7 @@ const PlayButton = styled.div`
     inset: -3px 0 0 8px;
     margin: auto;
     transform: rotate(-4deg);
+    filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
     background: url(${iconPlay}) no-repeat center center/contain;
   }
 
@@ -94,13 +97,19 @@ const Button = styled.button`
     0 0 2px 3px ${({ theme }) => theme.darkBlue};
   &:active {
     top: 3px;
-    box-shadow: inset 4px -5px 2px rgba(255, 255, 255, 0.15),
-      inset -4px -5px 2px rgba(255, 255, 255, 0.15),
+    box-shadow: inset 0px -3px 2px rgba(255, 255, 255, 0.15),
+      inset -0px -3px 2px rgba(255, 255, 255, 0.15),
       0 0 2px 3px ${({ theme }) => theme.darkBlue};
   }
 `;
 
 const Welcome = () => {
+  const navigate = useNavigate();
+
+  const redirectToCategories = () => {
+    navigate("/categories");
+  };
+
   return (
     <WelcomeWrapper>
       <BoxWrapper>
@@ -111,7 +120,7 @@ const Welcome = () => {
             title="The Hangman Game"
           />
         </LogoWrapper>
-        <PlayButton title="Play" />
+        <PlayButton title="Play" onClick={redirectToCategories} />
         <HowToWrapper>
           <Button>How to play</Button>
         </HowToWrapper>

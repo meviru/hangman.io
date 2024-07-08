@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import bgImage from "/mountains-starry-night.jpg";
 
 export const GlobalStyles = createGlobalStyle`
@@ -91,4 +91,10 @@ select {
   background: #6C727F; 
   border-radius: 5px;
 }
-`
+`;
+export const Container = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  max-width: 1240px;
+`;
