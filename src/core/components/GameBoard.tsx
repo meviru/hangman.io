@@ -44,25 +44,23 @@ const GameBoard = ({
   guessedLetters: string[];
   missingLetters: string[];
 }) => {
-  const renderWord = () => {
-    return (
-      missingLetters.length > 0 &&
-      word
-        .split("")
-        .map((letter: string, index: number) =>
-          letter === " " ? (
-            <LineBreak key={index} />
-          ) : guessedLetters.includes(letter.toLowerCase()) ||
-            !missingLetters.includes(letter.toLowerCase()) ? (
-            <LetterTile key={index}>{letter}</LetterTile>
-          ) : (
-            <LetterTile key={index}> </LetterTile>
-          )
-        )
-    );
-  };
-
-  return <BoardWrapper>{renderWord()}</BoardWrapper>;
+  return (
+    <BoardWrapper>
+      {missingLetters.length > 0 &&
+        word
+          .split("")
+          .map((letter: string, index: number) =>
+            letter === " " ? (
+              <LineBreak key={index} />
+            ) : guessedLetters.includes(letter.toLowerCase()) ||
+              !missingLetters.includes(letter.toLowerCase()) ? (
+              <LetterTile key={index}>{letter}</LetterTile>
+            ) : (
+              <LetterTile key={index}> </LetterTile>
+            )
+          )}
+    </BoardWrapper>
+  );
 };
 
 export default GameBoard;

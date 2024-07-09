@@ -21,32 +21,32 @@ const GameLayout = () => {
   const maxGuesses = 8;
 
   const [keyboard] = useState([
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "M",
-    "N",
-    "O",
-    "P",
-    "Q",
-    "R",
-    "S",
-    "T",
-    "U",
-    "V",
-    "W",
-    "X",
-    "Y",
-    "Z",
+    "q",
+    "w",
+    "e",
+    "r",
+    "t",
+    "y",
+    "u",
+    "i",
+    "o",
+    "p",
+    "a",
+    "s",
+    "d",
+    "f",
+    "g",
+    "h",
+    "j",
+    "k",
+    "l",
+    "z",
+    "x",
+    "c",
+    "v",
+    "b",
+    "n",
+    "m",
   ]);
 
   const getRandomWord = (array: string[]): string => {
@@ -56,23 +56,23 @@ const GameLayout = () => {
 
   const getMissingLetters = (word: string) => {
     const wordArray = word.replace(/\s/g, "").split("");
-    const uniqueLetters = [...new Set(wordArray)];
     const minMissing = 2;
-    const maxMissing = Math.min(4, uniqueLetters.length);
-    const numMissingChars =
+    const maxMissing = Math.min(5, wordArray.length - 2);
+    const numMissingLetters =
       Math.floor(Math.random() * (maxMissing - minMissing + 1)) + minMissing;
-    const missingChars: any = [];
+    const middleCharacters = wordArray.slice(1, -1);
+    const missingLetters: any = [];
 
-    while (missingChars.length < numMissingChars) {
-      const randomIndex = Math.floor(Math.random() * uniqueLetters.length);
-      const letter = uniqueLetters[randomIndex];
+    while (missingLetters.length < numMissingLetters) {
+      const randomIndex = Math.floor(Math.random() * middleCharacters.length);
+      const letter = middleCharacters[randomIndex];
 
-      if (!missingChars.includes(letter)) {
-        missingChars.push(letter);
+      if (!missingLetters.includes(letter)) {
+        missingLetters.push(letter);
       }
     }
 
-    setMissingLetters(missingChars);
+    setMissingLetters(missingLetters);
   };
 
   const handleGuess = (letter: string) => {
@@ -106,8 +106,8 @@ const GameLayout = () => {
   const isGameLost = incorrectGuesses.length >= maxGuesses;
   const progress =
     incorrectGuesses.length === 0
-      ? 0
-      : (incorrectGuesses.length / maxGuesses) * 100;
+      ? 100
+      : 100 - (incorrectGuesses.length / maxGuesses) * 100;
 
   return (
     <>
@@ -119,10 +119,12 @@ const GameLayout = () => {
           missingLetters={missingLetters}
         />
         <Keyboard
+          word={word}
           keyboard={keyboard}
           handleGuess={handleGuess}
           guessedLetters={guessedLetters}
           incorrectGuesses={incorrectGuesses}
+          missingLetters={missingLetters}
         />
         <div style={{ marginTop: "50px", textAlign: "center" }}>
           {isGameWon && <span>Congratulations! You won!</span>}

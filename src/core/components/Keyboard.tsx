@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const KeyWrapper = styled.div`
@@ -37,16 +38,30 @@ const Key = styled.button`
 `;
 
 const Keyboard = ({
+  word,
   keyboard,
   handleGuess,
   guessedLetters,
   incorrectGuesses,
+  missingLetters,
 }: {
+  word: string;
   keyboard: string[];
   handleGuess: any;
   guessedLetters: string[];
   incorrectGuesses: string[];
+  missingLetters: string[];
 }) => {
+  const [usedLetters, setUsedLetters] = useState<string[]>([]);
+
+  useEffect(() => {
+    const letters = word
+      .toLowerCase()
+      .split("")
+      .filter((letter) => !missingLetters.includes(letter));
+    setUsedLetters(letters);
+  }, [missingLetters]);
+
   return (
     <KeyWrapper>
       {keyboard.map((letter) => (
@@ -55,7 +70,8 @@ const Keyboard = ({
           onClick={() => handleGuess(letter.toLowerCase())}
           disabled={
             guessedLetters.includes(letter.toLowerCase()) ||
-            incorrectGuesses.includes(letter.toLowerCase())
+            incorrectGuesses.includes(letter.toLowerCase()) ||
+            usedLetters.includes(letter.toLowerCase())
           }
         >
           {letter}
