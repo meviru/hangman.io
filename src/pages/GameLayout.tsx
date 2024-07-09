@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Keyboard from "../core/components/Keyboard";
 import GameBoard from "../core/components/GameBoard";
 import Header from "../core/components/Header";
+import Modal from "../shared/components/Modal";
 
 const Container = styled.div`
   width: 100%;
@@ -10,6 +11,24 @@ const Container = styled.div`
   padding: 0 20px;
   max-width: 1240px;
 `;
+
+const ModalTitle = styled.div`
+  text-align: center;
+  margin-top: -100px;
+`;
+
+const ModalTitleText = styled.h2`
+  font-size: 120px;
+  font-weight: normal;
+  background: linear-gradient(179.43deg, #83c0fb 40.1%, #e7f3ff 89.61%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(5px 7px 0px #153147);
+`;
+
+const ModalActions = styled.div`
+`
 
 const GameLayout = () => {
   const [categoryTitle, setCategoryTitle] = useState<string | any>("");
@@ -48,6 +67,12 @@ const GameLayout = () => {
     "n",
     "m",
   ]);
+
+  const [isGameWon, setIsGameWon] = useState<boolean>(false);
+  const [isGameLost, setIsGameLost] = useState<boolean>(false);
+  const [progress, setProgress] = useState<number>(100);
+
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const getRandomWord = (array: string[]): string => {
     const randomIndex = Math.floor(Math.random() * array.length);
@@ -100,7 +125,6 @@ const GameLayout = () => {
     getMissingLetters(word);
   }, [word]);
 
-  const [isGameWon, setIsGameWon] = useState<boolean>(false);
   useEffect(() => {
     const isGameWon = word
       .split("")
@@ -112,9 +136,6 @@ const GameLayout = () => {
     setIsGameWon(isGameWon);
   }, [guessedLetters, missingLetters]);
 
-  const [isGameLost, setIsGameLost] = useState<boolean>(false);
-  const [progress, setProgress] = useState<number>(100);
-
   useEffect(() => {
     setIsGameLost(incorrectGuesses.length >= maxGuesses);
     setProgress(
@@ -123,6 +144,19 @@ const GameLayout = () => {
         : 100 - (incorrectGuesses.length / maxGuesses) * 100
     );
   }, [incorrectGuesses]);
+
+  useEffect(() => {
+    if (isGameWon) {
+      setIsModalOpen(true);
+    }
+    if (isGameLost) {
+      setIsModalOpen(false);
+    }
+  }, [isGameWon, isGameLost]);
+
+  const onModalClose = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <>
@@ -141,10 +175,14 @@ const GameLayout = () => {
           incorrectGuesses={incorrectGuesses}
           missingLetters={missingLetters}
         />
-        <div style={{ marginTop: "50px", textAlign: "center" }}>
-          {isGameWon && <span>Congratulations! You won!</span>}
-          {isGameLost && <span>Game Over! The word was "{word}".</span>}
-        </div>
+        <Modal isOpen={isModalOpen} onClose={onModalClose}>
+          <ModalTitle>
+            {isGameWon && <ModalTitleText>You win</ModalTitleText>}
+            {isGameLost && <ModalTitleText>Game Over!</ModalTitleText>}
+            {isGameLost && <span>The word was "{word}".</span>}
+          </ModalTitle>
+          <ModalActions></ModalActions>
+        </Modal>
       </Container>
     </>
   );
