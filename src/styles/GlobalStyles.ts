@@ -13,7 +13,6 @@ img {
     max-width: 100%;
 }
 
-html,
 body {
     font-family: "Mouse Memoirs", sans-serif;
     height: 100%;
@@ -21,7 +20,7 @@ body {
     line-height: 1.2;
     font-weight: normal;
     color: ${({ theme }) => theme.lightText};
-    background: url("${bgImage}") no-repeat top center/cover;
+    background: url("${bgImage}") no-repeat center center/cover;
 }
 
 body {

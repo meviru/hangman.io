@@ -90,24 +90,39 @@ const GameLayout = () => {
 
     setCategoryTitle(title);
     setWord(getRandomWord(words));
+
+    return () => {
+      setWord("");
+    };
   }, []);
 
   useEffect(() => {
     getMissingLetters(word);
   }, [word]);
 
-  const isGameWon = word
-    .split("")
-    .every(
-      (letter) =>
-        guessedLetters.includes(letter.toLowerCase()) ||
-        !missingLetters.includes(letter.toLowerCase())
+  const [isGameWon, setIsGameWon] = useState<boolean>(false);
+  useEffect(() => {
+    const isGameWon = word
+      .split("")
+      .every(
+        (letter) =>
+          guessedLetters.includes(letter.toLowerCase()) ||
+          !missingLetters.includes(letter.toLowerCase())
+      );
+    setIsGameWon(isGameWon);
+  }, [guessedLetters, missingLetters]);
+
+  const [isGameLost, setIsGameLost] = useState<boolean>(false);
+  const [progress, setProgress] = useState<number>(100);
+
+  useEffect(() => {
+    setIsGameLost(incorrectGuesses.length >= maxGuesses);
+    setProgress(
+      incorrectGuesses.length === 0
+        ? 100
+        : 100 - (incorrectGuesses.length / maxGuesses) * 100
     );
-  const isGameLost = incorrectGuesses.length >= maxGuesses;
-  const progress =
-    incorrectGuesses.length === 0
-      ? 100
-      : 100 - (incorrectGuesses.length / maxGuesses) * 100;
+  }, [incorrectGuesses]);
 
   return (
     <>
