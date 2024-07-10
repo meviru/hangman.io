@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 
 const KeyWrapper = styled.div`
@@ -39,19 +39,48 @@ const Key = styled.button`
 
 const Keyboard = ({
   word,
-  keyboard,
   handleGuess,
   guessedLetters,
   incorrectGuesses,
   missingLetters,
 }: {
   word: string;
-  keyboard: string[];
   handleGuess: any;
   guessedLetters: string[];
   incorrectGuesses: string[];
   missingLetters: string[];
 }) => {
+  const keyboard = useMemo(
+    () => [
+      "q",
+      "w",
+      "e",
+      "r",
+      "t",
+      "y",
+      "u",
+      "i",
+      "o",
+      "p",
+      "a",
+      "s",
+      "d",
+      "f",
+      "g",
+      "h",
+      "j",
+      "k",
+      "l",
+      "z",
+      "x",
+      "c",
+      "v",
+      "b",
+      "n",
+      "m",
+    ],
+    []
+  );
   const [usedLetters, setUsedLetters] = useState<string[]>([]);
 
   useEffect(() => {
