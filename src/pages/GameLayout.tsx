@@ -4,6 +4,7 @@ import Keyboard from "../core/components/Keyboard";
 import GameBoard from "../core/components/GameBoard";
 import Header from "../core/components/Header";
 import Modal from "../shared/components/Modal";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 100%;
@@ -14,7 +15,7 @@ const Container = styled.div`
 
 const ModalTitle = styled.div`
   text-align: center;
-  margin-top: -100px;
+  margin-top: -150px;
 `;
 
 const ModalTitleText = styled.h2`
@@ -28,7 +29,38 @@ const ModalTitleText = styled.h2`
 `;
 
 const ModalActions = styled.div`
-`
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const ActionButton = styled.button<{ color?: string }>`
+  position: relative;
+  display: flex;
+  cursor: pointer;
+  font-size: 32px;
+  padding: 12px 50px;
+  align-items: center;
+  justify-content: center;
+  color: ${({ theme }) => theme.lightText};
+  border-radius: 35px;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 1px ${({ theme }) => theme.black};
+  background: ${({ theme }) =>
+    (props) =>
+      props.color !== "secondary" ? theme.primary : theme.gradientBg};
+  box-shadow: inset 4px 5px 2px rgba(255, 255, 255, 0.15),
+    inset -4px 5px 2px rgba(255, 255, 255, 0.15),
+    0 0 2px 3px ${({ theme }) => theme.darkBlue};
+  &:active {
+    top: 3px;
+    box-shadow: inset 0px -3px 2px rgba(255, 255, 255, 0.15),
+      inset -0px -3px 2px rgba(255, 255, 255, 0.15),
+      0 0 2px 3px ${({ theme }) => theme.darkBlue};
+  }
+`;
 
 const GameLayout = () => {
   const [categoryTitle, setCategoryTitle] = useState<string | any>("");
@@ -38,6 +70,8 @@ const GameLayout = () => {
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
   const [incorrectGuesses, setIncorrectGuesses] = useState<string[]>([]);
   const maxGuesses = 8;
+
+  const navigate = useNavigate();
 
   const [keyboard] = useState([
     "q",
@@ -146,16 +180,22 @@ const GameLayout = () => {
   }, [incorrectGuesses]);
 
   useEffect(() => {
-    if (isGameWon) {
+    if (isGameWon || isGameLost) {
       setIsModalOpen(true);
-    }
-    if (isGameLost) {
+    } else {
       setIsModalOpen(false);
     }
   }, [isGameWon, isGameLost]);
 
-  const onModalClose = () => {
+  const onModalClose = (isQuit: boolean = false) => {
     setIsModalOpen(false);
+    if (isQuit) {
+      navigate("/");
+    }
+  };
+
+  const redirectToCategory = () => {
+    navigate("/categories");
   };
 
   return (
@@ -175,13 +215,27 @@ const GameLayout = () => {
           incorrectGuesses={incorrectGuesses}
           missingLetters={missingLetters}
         />
-        <Modal isOpen={isModalOpen} onClose={onModalClose}>
-          <ModalTitle>
-            {isGameWon && <ModalTitleText>You win</ModalTitleText>}
-            {isGameLost && <ModalTitleText>Game Over!</ModalTitleText>}
-            {isGameLost && <span>The word was "{word}".</span>}
-          </ModalTitle>
-          <ModalActions></ModalActions>
+        <Modal isOpen={isModalOpen} onClose={() => onModalClose(false)}>
+          {(isGameWon || isGameLost) && (
+            <ModalTitle>
+              {isGameWon && <ModalTitleText>You win</ModalTitleText>}
+              {isGameLost && <ModalTitleText>Game Over</ModalTitleText>}
+              {isGameLost && <span>The word was "{word}".</span>}
+            </ModalTitle>
+          )}
+          <ModalActions>
+            <ActionButton type="button">Continue</ActionButton>
+            <ActionButton type="button" onClick={redirectToCategory}>
+              New Category
+            </ActionButton>
+            <ActionButton
+              type="button"
+              color="secondary"
+              onClick={() => onModalClose(true)}
+            >
+              Quit Game
+            </ActionButton>
+          </ModalActions>
         </Modal>
       </Container>
     </>
