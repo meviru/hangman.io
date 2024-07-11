@@ -125,7 +125,7 @@ const GameLayout = () => {
 
     const missingLetters = word
       .split("")
-      .filter((char: string, index) => shuffledIndices.includes(index));
+      .filter((_, index: number) => shuffledIndices.includes(index));
 
     setMissingLetters(missingLetters);
   }, []);
