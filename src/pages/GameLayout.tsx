@@ -303,7 +303,7 @@ const GameLayout = () => {
           </ModalTitle>
           <ModalActions>
             <ActionButton type="button" onClick={onPauseModalClose}>
-              Continue
+              Resume
             </ActionButton>
             <ActionButton type="button" onClick={redirectToCategory}>
               New Category
