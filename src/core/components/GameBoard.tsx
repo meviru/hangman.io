@@ -5,7 +5,7 @@ const BoardWrapper = styled.div`
   gap: 10px 20px;
   flex-wrap: wrap;
   padding: 70px 0;
-  min-height: 388px;
+  min-height: 370px;
   align-items: center;
   justify-content: center;
 `;

@@ -84,6 +84,7 @@ const GameLayout = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isCongratsModalOpen, setIsCongratsModalOpen] =
     useState<boolean>(false);
+  const [isPauseModalOpen, setIsPauseModalOpen] = useState<boolean>(false);
 
   const getRandomWord = useCallback((array: string[]) => {
     if (array.length === 0) {
@@ -97,28 +98,34 @@ const GameLayout = () => {
   }, []);
 
   const getMissingLetters = useCallback((word: string) => {
-    const wordArray = word.split("");
-    const wordLength = wordArray.length;
+    const wordLength = word.replace(/\s/g, "").length;
 
-    const minMissing = 2;
-    const maxMissing = Math.min(5, wordLength - minMissing);
-    const numMissingLetters =
-      Math.floor(Math.random() * (maxMissing - minMissing + 1)) + minMissing;
+    let minHidden, maxHidden;
+    if (wordLength >= 5) {
+      minHidden = 4;
+      maxHidden = Math.min(5, wordLength - 1);
+    } else {
+      minHidden = 3;
+      maxHidden = Math.max(3, wordLength - 2);
+    }
 
-    const middleIndices = wordArray
-      .map((_, index) => index)
-      .filter((index) => index !== 0 && index !== wordLength - 1);
+    const numHidden =
+      Math.floor(Math.random() * (maxHidden - minHidden + 1)) + minHidden;
+
+    const middleIndices = [];
+    for (let i = 0; i < word.length; i++) {
+      if (word[i] !== " ") {
+        middleIndices.push(i);
+      }
+    }
 
     const shuffledIndices = middleIndices
       .sort(() => 0.5 - Math.random())
-      .slice(0, numMissingLetters);
+      .slice(0, numHidden);
 
-    const missingLetters = wordArray.map((char, index) => {
-      if (shuffledIndices.includes(index)) {
-        return " ";
-      }
-      return char;
-    });
+    const missingLetters = word
+      .split("")
+      .filter((char: string, index) => shuffledIndices.includes(index));
 
     setMissingLetters(missingLetters);
   }, []);
@@ -215,9 +222,17 @@ const GameLayout = () => {
     generateRandomWord();
   }, [generateRandomWord]);
 
+  const onPause = () => {
+    setIsPauseModalOpen(true);
+  };
+
+  const onPauseModalClose = () => {
+    setIsPauseModalOpen(false);
+  };
+
   return (
     <Container>
-      <Header title={categoryTitle} progress={progress} />
+      <Header title={categoryTitle} progress={progress} onPause={onPause} />
       <GameBoard
         word={word}
         guessedLetters={guessedLetters}
@@ -279,6 +294,29 @@ const GameLayout = () => {
             </ModalActions>
           </Modal>
         </>
+      )}
+
+      {isPauseModalOpen && (
+        <Modal isOpen={isPauseModalOpen} onClose={onPauseModalClose}>
+          <ModalTitle>
+            <ModalTitleText>Paused</ModalTitleText>
+          </ModalTitle>
+          <ModalActions>
+            <ActionButton type="button" onClick={onPauseModalClose}>
+              Continue
+            </ActionButton>
+            <ActionButton type="button" onClick={redirectToCategory}>
+              New Category
+            </ActionButton>
+            <ActionButton
+              type="button"
+              color="secondary"
+              onClick={() => onModalClose(true)}
+            >
+              Quit Game
+            </ActionButton>
+          </ModalActions>
+        </Modal>
       )}
     </Container>
   );

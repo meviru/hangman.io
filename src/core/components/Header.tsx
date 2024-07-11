@@ -15,6 +15,7 @@ const HeaderLeft = styled.div`
 `;
 
 const HeaderToggleBtn = styled.div`
+  position: relative;
   display: flex;
   width: 95px;
   height: 95px;
@@ -26,6 +27,11 @@ const HeaderToggleBtn = styled.div`
   background: ${({ theme }) => theme.gradientBg};
   box-shadow: inset 4px -10px 2px rgba(0, 0, 0, 0.15),
     inset -4px -10px 2px rgba(0, 0, 0, 0.15);
+  &:active {
+    top: 3px;
+    box-shadow: inset 4px -5px 2px rgba(0, 0, 0, 0.15),
+      inset -4px -5px 2px rgba(0, 0, 0, 0.15);
+  }
 `;
 
 const ToggleIcon = styled.div`
@@ -86,11 +92,19 @@ const Heart = styled.div`
   margin: 5px 0 0 15px;
 `;
 
-const Header = ({ title, progress }: { title: string; progress: number }) => {
+const Header = ({
+  title,
+  progress,
+  onPause,
+}: {
+  title: string;
+  progress: number;
+  onPause: any;
+}) => {
   return (
     <HeaderWrapper>
       <HeaderLeft>
-        <HeaderToggleBtn>
+        <HeaderToggleBtn onClick={onPause}>
           <ToggleIcon />
         </HeaderToggleBtn>
         <HeaderTitle>{title}</HeaderTitle>

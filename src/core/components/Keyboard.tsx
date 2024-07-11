@@ -5,6 +5,7 @@ const KeyWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 28px 20px;
+  margin-bottom: 100px;
 `;
 
 const Key = styled.button`
