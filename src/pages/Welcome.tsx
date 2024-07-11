@@ -2,6 +2,7 @@ import styled from "styled-components";
 import siteLogo from "/logo.svg";
 import iconPlay from "/play-alt-svgrepo-com.svg";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const WelcomeWrapper = styled.div`
   display: flex;
@@ -103,6 +104,17 @@ const Button = styled.button`
   }
 `;
 
+const variants = {
+  hidden: { y: "200px", opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+    },
+  },
+};
+
 const Welcome = () => {
   const navigate = useNavigate();
 
@@ -112,7 +124,12 @@ const Welcome = () => {
 
   return (
     <WelcomeWrapper>
-      <BoxWrapper>
+      <BoxWrapper
+        as={motion.div}
+        initial="hidden"
+        animate="visible"
+        variants={variants}
+      >
         <LogoWrapper>
           <Logo
             src={siteLogo}

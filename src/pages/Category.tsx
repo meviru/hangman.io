@@ -5,8 +5,9 @@ import { useEffect, useState } from "react";
 import { ICategory } from "../models";
 import getCategories from "../services/HangmanService";
 import { useNavigate } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 
-const CategoryList = styled.ul`
+const CategoryList = styled(motion.ul)`
   display: grid;
   gap: 35px;
   width: 100%;
@@ -14,7 +15,7 @@ const CategoryList = styled.ul`
   grid-template-columns: repeat(4, 1fr);
 `;
 
-const CategoryItem = styled.li`
+const CategoryItem = styled(motion.li)`
   position: relative;
   display: flex;
   cursor: pointer;
@@ -40,6 +41,28 @@ const CategoryItem = styled.li`
       0 0 2px 3px ${({ theme }) => theme.darkBlue};
   }
 `;
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.5,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 45 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      delay: i * 0.05,
+    },
+  }),
+};
 
 const Category = () => {
   const [categories, setCategories] = useState<ICategory[]>([]);
@@ -67,17 +90,27 @@ const Category = () => {
     <>
       <Container>
         <Topbar title="Pick a Category" isBackBtnVisible={true} />
-        <CategoryList>
-          {categories &&
-            categories.length > 0 &&
-            categories.map((category) => (
-              <CategoryItem
-                key={category.id}
-                onClick={() => redirectToGame(category.id, category.name)}
-              >
-                {category.name}
-              </CategoryItem>
-            ))}
+        <CategoryList
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+        >
+          <AnimatePresence>
+            {categories &&
+              categories.length > 0 &&
+              categories.map((category, i) => (
+                <CategoryItem
+                  key={category.id}
+                  custom={i}
+                  initial="hidden"
+                  animate="visible"
+                  variants={itemVariants}
+                  onClick={() => redirectToGame(category.id, category.name)}
+                >
+                  {category.name}
+                </CategoryItem>
+              ))}
+          </AnimatePresence>
         </CategoryList>
       </Container>
     </>
