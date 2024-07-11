@@ -4,7 +4,6 @@ export interface ModalProps {
   isOpen: boolean;
   children: ReactNode;
   onClose: () => void;
-  hideOverlay?: boolean;
 }
 
 export interface ICategory {

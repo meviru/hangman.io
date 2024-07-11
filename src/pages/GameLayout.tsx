@@ -28,6 +28,12 @@ const ModalTitleText = styled.h2`
   filter: drop-shadow(5px 7px 0px #153147);
 `;
 
+const ModalSubtitle = styled.h3`
+  margin: 15px 0 30px;
+  font-size: 35px;
+  font-weight: normal;
+`;
+
 const ModalActions = styled.div`
   display: flex;
   gap: 30px;
@@ -76,8 +82,14 @@ const GameLayout = () => {
   const [isGameLost, setIsGameLost] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(100);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isCongratsModalOpen, setIsCongratsModalOpen] =
+    useState<boolean>(false);
 
   const getRandomWord = useCallback((array: string[]) => {
+    if (array.length === 0) {
+      setIsCongratsModalOpen(true);
+      return;
+    }
     const randomIndex = Math.floor(Math.random() * array.length);
     const selectedWord = array[randomIndex];
     setWord(selectedWord);
@@ -87,31 +99,29 @@ const GameLayout = () => {
   const getMissingLetters = useCallback((word: string) => {
     const wordArray = word.split("");
     const wordLength = wordArray.length;
-  
-    // Ensure at least 2 characters remain visible and handle short words appropriately
+
     const minMissing = 2;
     const maxMissing = Math.min(5, wordLength - minMissing);
-    const numMissingLetters = Math.floor(Math.random() * (maxMissing - minMissing + 1)) + minMissing;
-  
-    // Indices that can be missing (excluding first and last character)
+    const numMissingLetters =
+      Math.floor(Math.random() * (maxMissing - minMissing + 1)) + minMissing;
+
     const middleIndices = wordArray
       .map((_, index) => index)
-      .filter(index => index !== 0 && index !== wordLength - 1);
-  
-    // Shuffle the middleIndices array and take the first numMissingLetters elements
-    const shuffledIndices = middleIndices.sort(() => 0.5 - Math.random()).slice(0, numMissingLetters);
-  
-    // Create the missing letters array
+      .filter((index) => index !== 0 && index !== wordLength - 1);
+
+    const shuffledIndices = middleIndices
+      .sort(() => 0.5 - Math.random())
+      .slice(0, numMissingLetters);
+
     const missingLetters = wordArray.map((char, index) => {
       if (shuffledIndices.includes(index)) {
         return " ";
       }
       return char;
     });
-  
+
     setMissingLetters(missingLetters);
   }, []);
-  
 
   const handleGuess = useCallback(
     (letter: string) => {
@@ -160,7 +170,17 @@ const GameLayout = () => {
 
   useEffect(() => {
     if (isGameWon || isGameLost) {
-      setIsModalOpen(true);
+      const wordsData = localStorage.getItem("words");
+      const words = wordsData ? JSON.parse(wordsData) : [];
+
+      const updatedWords = words.filter((w: string) => w !== word);
+      localStorage.setItem("words", JSON.stringify(updatedWords));
+
+      if (updatedWords.length === 0) {
+        setIsCongratsModalOpen(true);
+      } else {
+        setIsModalOpen(true);
+      }
     } else {
       setIsModalOpen(false);
     }
@@ -169,6 +189,8 @@ const GameLayout = () => {
   const onModalClose = useCallback(
     (isQuit: boolean = false) => {
       setIsModalOpen(false);
+      setIsCongratsModalOpen(false);
+      onContinue();
       if (isQuit) {
         navigate("/");
       }
@@ -189,6 +211,7 @@ const GameLayout = () => {
     setIsGameWon(false);
     setIsGameLost(false);
     setIsModalOpen(false);
+    setIsCongratsModalOpen(false);
     generateRandomWord();
   }, [generateRandomWord]);
 
@@ -207,30 +230,56 @@ const GameLayout = () => {
         incorrectGuesses={incorrectGuesses}
         missingLetters={missingLetters}
       />
-      <Modal isOpen={isModalOpen} onClose={() => onModalClose(false)}>
-        {(isGameWon || isGameLost) && (
-          <ModalTitle>
-            {isGameWon && <ModalTitleText>You win</ModalTitleText>}
-            {isGameLost && <ModalTitleText>Game Over</ModalTitleText>}
-            {isGameLost && <span>The word was "{word}".</span>}
-          </ModalTitle>
-        )}
-        <ModalActions>
-          <ActionButton type="button" onClick={onContinue}>
-            Continue
-          </ActionButton>
-          <ActionButton type="button" onClick={redirectToCategory}>
-            New Category
-          </ActionButton>
-          <ActionButton
-            type="button"
-            color="secondary"
-            onClick={() => onModalClose(true)}
+      {(isGameWon || isGameLost) && (
+        <>
+          <Modal isOpen={isModalOpen} onClose={() => onModalClose(false)}>
+            <ModalTitle>
+              {isGameWon && <ModalTitleText>You win</ModalTitleText>}
+              {isGameLost && <ModalTitleText>Game Over</ModalTitleText>}
+              {isGameLost && (
+                <ModalSubtitle>The word was "{word}".</ModalSubtitle>
+              )}
+            </ModalTitle>
+
+            <ModalActions>
+              <ActionButton type="button" onClick={onContinue}>
+                Continue
+              </ActionButton>
+              <ActionButton type="button" onClick={redirectToCategory}>
+                New Category
+              </ActionButton>
+              <ActionButton
+                type="button"
+                color="secondary"
+                onClick={() => onModalClose(true)}
+              >
+                Quit Game
+              </ActionButton>
+            </ModalActions>
+          </Modal>
+          <Modal
+            isOpen={isCongratsModalOpen}
+            onClose={() => onModalClose(false)}
           >
-            Quit Game
-          </ActionButton>
-        </ModalActions>
-      </Modal>
+            <ModalTitle>
+              <ModalTitleText>Wohoooo!</ModalTitleText>
+              <ModalSubtitle>You've guessed all the words!</ModalSubtitle>
+            </ModalTitle>
+            <ModalActions>
+              <ActionButton type="button" onClick={redirectToCategory}>
+                New Category
+              </ActionButton>
+              <ActionButton
+                type="button"
+                color="secondary"
+                onClick={() => onModalClose(true)}
+              >
+                Quit Game
+              </ActionButton>
+            </ModalActions>
+          </Modal>
+        </>
+      )}
     </Container>
   );
 };
