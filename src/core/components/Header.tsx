@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const HeaderWrapper = styled.header`
@@ -66,10 +67,12 @@ const HeaderTitle = styled.h2`
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(5px 7px 0px #153147);
 `;
+
 const GameStatus = styled.div`
   display: flex;
   align-items: center;
 `;
+
 const ProgressWrapper = styled.div`
   display: flex;
   height: 32px;
@@ -86,10 +89,15 @@ const ProgressBar = styled.div<{ width?: number }>`
   width: ${(props) => props.width}%;
   border-radius: 25px;
   background-color: ${({ theme }) => theme.darkText};
+  transition: 0.35s ease width;
 `;
 
 const Heart = styled.div`
   margin: 5px 0 0 15px;
+`;
+
+const MaskRect = styled.rect<{ height: number }>`
+  transition: height 0.45s ease;
 `;
 
 const Header = ({
@@ -101,6 +109,13 @@ const Header = ({
   progress: number;
   onPause: any;
 }) => {
+  const [maskHeight, setMaskHeight] = useState(0);
+
+  useEffect(() => {
+    const calculatedMaskHeight = (progress / 100) * 20;
+    setMaskHeight(calculatedMaskHeight);
+  }, [progress]);
+
   return (
     <HeaderWrapper>
       <HeaderLeft>
@@ -127,9 +142,25 @@ const Header = ({
                 <stop offset="40%" stopColor="#F573FE" />
                 <stop offset="80%" stopColor="#897FFC" />
               </linearGradient>
+              <mask id="mask">
+                <rect x="0" y="0" width="24" height="24" fill="white" />
+                <MaskRect
+                  id="mask-rect"
+                  x="0"
+                  y="0"
+                  width="24"
+                  height={20 - maskHeight}
+                  fill="black"
+                />
+              </mask>
             </defs>
             <path
+              fill="white"
+              d="M2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5C13 20.5 14 19.7294 15.0383 18.9109C17.9806 16.5914 22 14 22 9.1371C22 4.27416 16.4998 0.825464 12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371Z"
+            />
+            <path
               fill="url(#gradient)"
+              mask="url(#mask)"
               d="M2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5C13 20.5 14 19.7294 15.0383 18.9109C17.9806 16.5914 22 14 22 9.1371C22 4.27416 16.4998 0.825464 12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371Z"
             />
           </svg>
