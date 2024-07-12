@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 
 const BoardWrapper = styled.div`
@@ -35,6 +36,11 @@ const LineBreak = styled.div`
   flex: 0 0 100%;
 `;
 
+const itemVariants = {
+  hidden: { scale: 1.4 },
+  visible: { scale: 1 },
+};
+
 const GameBoard = ({
   word,
   guessedLetters,
@@ -47,18 +53,30 @@ const GameBoard = ({
   return (
     <BoardWrapper>
       {missingLetters.length > 0 &&
-        word
-          .split("")
-          .map((letter: string, index: number) =>
-            letter === " " ? (
-              <LineBreak key={index} />
-            ) : guessedLetters.includes(letter.toLowerCase()) ||
-              !missingLetters.includes(letter.toLowerCase()) ? (
-              <LetterTile key={index}>{letter}</LetterTile>
-            ) : (
-              <LetterTile key={index}> </LetterTile>
-            )
-          )}
+        word.split("").map((letter: string, index: number) =>
+          letter === " " ? (
+            <LineBreak key={index} />
+          ) : guessedLetters.includes(letter.toLowerCase()) ||
+            !missingLetters.includes(letter.toLowerCase()) ? (
+            <LetterTile
+              as={motion.div}
+              initial="hidden"
+              animate="visible"
+              variants={itemVariants}
+              key={index}
+            >
+              <motion.span
+                initial="hidden"
+                animate="visible"
+                variants={itemVariants}
+              >
+                {letter}
+              </motion.span>
+            </LetterTile>
+          ) : (
+            <LetterTile key={index}> </LetterTile>
+          )
+        )}
     </BoardWrapper>
   );
 };

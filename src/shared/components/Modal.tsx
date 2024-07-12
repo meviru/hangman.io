@@ -50,15 +50,23 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
         <Overlay
           key="overlay"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          animate={{
+            opacity: 1,
+            transition: {
+              delay: 0.3,
+            },
+          }}
           onClick={onClose}
         >
           <ModalContainer
             key="modal"
             initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            exit={{ scale: 0 }}
+            animate={{
+              scale: 1,
+              transition: {
+                delay: 0.3,
+              },
+            }}
             onClick={(e) => e.stopPropagation()}
           >
             {children}
