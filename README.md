@@ -39,7 +39,6 @@ To get started with Hangman.io, follow these steps:
 - Enjoy the game!
 
 ## Screenshots
-![Welcome Screen](https://github.com/meviru/github-repo-assets/blob/main/hangman.io/screely-1720786674338.png)
 ![Category Screen](https://github.com/meviru/github-repo-assets/blob/main/hangman.io/screely-1720786695013.png)
 ![Guessing Screen](https://github.com/meviru/github-repo-assets/blob/main/hangman.io/screely-1720786711011.png)
 ![You Won Screen](https://github.com/meviru/github-repo-assets/blob/main/hangman.io/screely-1720786774500.png)
