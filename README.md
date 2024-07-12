@@ -1,30 +1,46 @@
-# React + TypeScript + Vite
+<p align="center"><img alt="Hangman.io" src="https://raw.githubusercontent.com/meviru/github-repo-assets/main/hangman.io/logo.svg"></p>
+<img src="https://github.com/meviru/github-repo-assets/blob/main/hangman.io/screely-1720786674338.png" alt="Welcome Screen">
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to **Hangman.io**, an interactive and fun digital version of the classic Hangman game! This project brings the timeless word-guessing challenge to the modern web, offering an engaging experience for players of all ages.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Screenshots](#screenshots)
+- [Technologies Used](#technologies-used)
+- [Contributing](#contributing)
+- [License](#license)
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Multiple Categories**: Choose from various word categories to challenge your guessing skills.
+- **Interactive UI**: Enjoy a responsive and intuitive user interface with animated transitions.
+- **Progress Tracking**: Track your progress with a visually appealing progress bar and a heartometer.
+- **Mobile Friendly**: Play Hangman.io on any device, whether it's a desktop, tablet, or smartphone.
 
-- Configure the top-level `parserOptions` property like this:
+## Installation
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+To get started with Hangman.io, follow these steps:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+1. **Clone the repository**:
+   ```sh
+   git clone https://github.com/meviru/hangman.io.git
+   cd hangman.io
+4. **Install packages and start the development server**:
+   ```sh
+   npm install
+   npm run dev
+
+## Usage
+- Open your browser and go to http://localhost:3000.
+- Pick a category and start guessing letters to find the hidden word.
+- Enjoy the game!
+
+## Screenshots
+![Welcome Screen](https://github.com/meviru/github-repo-assets/blob/main/hangman.io/screely-1720786674338.png)
+![Category Screen](https://github.com/meviru/github-repo-assets/blob/main/hangman.io/screely-1720786695013.png)
+![Guessing Screen](https://github.com/meviru/github-repo-assets/blob/main/hangman.io/screely-1720786711011.png)
+![You Won Screen](https://github.com/meviru/github-repo-assets/blob/main/hangman.io/screely-1720786774500.png)
+![Gameover Screen](https://github.com/meviru/github-repo-assets/blob/main/hangman.io/screely-1720786726681.png)
