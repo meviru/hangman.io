@@ -34,7 +34,7 @@ To get started with Hangman.io, follow these steps:
    npm run dev
 
 ## Usage
-- Open your browser and go to http://localhost:3000.
+- Open your browser and go to http://localhost:5173.
 - Pick a category and start guessing letters to find the hidden word.
 - Enjoy the game!
 
