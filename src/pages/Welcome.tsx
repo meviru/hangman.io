@@ -10,6 +10,10 @@ const WelcomeWrapper = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: center;
+
+  @media (max-width: 767px) {
+    padding: 0 20px;
+  }
 `;
 
 const BoxWrapper = styled.div`
@@ -31,6 +35,10 @@ const LogoWrapper = styled.div`
   height: 176px;
   max-width: 300px;
   margin: -100px auto 0;
+  @media (max-width: 767px) {
+    max-width: 230px;
+    height: 136px;
+  }
 `;
 
 const Logo = styled.img`
@@ -73,6 +81,17 @@ const PlayButton = styled.div`
       inset -4px -6px 2px rgba(0, 0, 0, 0.3),
       inset 4px -6px 2px rgba(0, 0, 0, 0.3);
   }
+
+  @media (max-width: 767px) {
+    width: 100px;
+    height: 100px;
+    margin: 20px auto 30px;
+    &:before {
+      width: 45px;
+      height: 45px;
+      inset: -8px 0 0 8px;
+    }
+  }
 `;
 
 const HowToWrapper = styled.div`
@@ -101,6 +120,10 @@ const Button = styled.button`
     box-shadow: inset 0px -3px 2px rgba(255, 255, 255, 0.15),
       inset -0px -3px 2px rgba(255, 255, 255, 0.15),
       0 0 2px 3px ${({ theme }) => theme.darkBlue};
+  }
+  @media (max-width: 767px) {
+    font-size: 25px;
+    padding: 12px 40px;
   }
 `;
 
