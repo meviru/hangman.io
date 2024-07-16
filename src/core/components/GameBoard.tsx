@@ -9,6 +9,13 @@ const BoardWrapper = styled.div`
   min-height: 370px;
   align-items: center;
   justify-content: center;
+  @media (max-width: 1024px) {
+    padding: 40px 0;
+    min-height: 240px;
+  }
+  @media (max-width: 1024px) {
+    gap: 10px 15px;
+  }
 `;
 
 const LetterTile = styled.div`
@@ -29,6 +36,18 @@ const LetterTile = styled.div`
     0 0 2px 3px ${({ theme }) => theme.darkBlue};
   &.blank {
     opacity: 0.4;
+  }
+  @media (max-width: 1024px) {
+    width: 78px;
+    height: 94px;
+    font-size: 70px;
+    border-radius: 30px;
+  }
+  @media (max-width: 767px) {
+    width: 42px;
+    height: 56px;
+    font-size: 45px;
+    border-radius: 15px;
   }
 `;
 

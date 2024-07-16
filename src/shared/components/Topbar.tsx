@@ -21,7 +21,7 @@ const TopbarLeft = styled.div`
   column-gap: 40px;
   align-items: center;
   @media (max-width: 1024px) {
-    column-gap: 30px;
+    column-gap: 15px;
   }
 `;
 
@@ -50,9 +50,9 @@ const TopbarBtn = styled.div`
     flex: 0 0 85px;
   }
   @media (max-width: 767px) {
-    width: 65px;
-    height: 65px;
-    flex: 0 0 65px;
+    width: 50px;
+    height: 50px;
+    flex: 0 0 50px;
   }
 `;
 
@@ -82,7 +82,7 @@ const TopbarTitle = styled.div`
     font-size: 60px;
   }
   @media (max-width: 767px) {
-    font-size: 45px;
+    font-size: 40px;
   }
 `;
 

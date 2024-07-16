@@ -6,6 +6,13 @@ const KeyWrapper = styled.div`
   flex-wrap: wrap;
   gap: 28px 20px;
   margin-bottom: 100px;
+  justify-content: center;
+  @media (max-width: 1024px) {
+    gap: 28px 25px;
+  }
+  @media (max-width: 767px) {
+    gap: 20px 15px;
+  }
 `;
 
 const Key = styled.button`
@@ -35,6 +42,17 @@ const Key = styled.button`
     &:after {
       top: 3px;
     }
+  }
+  @media (max-width: 1024px) {
+    width: 82px;
+    height: 62px;
+    font-size: 45px;
+  }
+  @media (max-width: 767px) {
+    width: 70px;
+    height: 45px;
+    font-size: 35px;
+    border-radius: 15px;
   }
 `;
 

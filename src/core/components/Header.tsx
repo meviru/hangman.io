@@ -7,12 +7,21 @@ const HeaderWrapper = styled.header`
   padding-top: 64px;
   align-items: center;
   justify-content: space-between;
+  @media (max-width: 1024px) {
+    padding-top: 54px;
+  }
+  @media (max-width: 767px) {
+    padding-top: 44px;
+  }
 `;
 
 const HeaderLeft = styled.div`
   display: flex;
   column-gap: 40px;
   align-items: center;
+  @media (max-width: 1024px) {
+    column-gap: 15px;
+  }
 `;
 
 const HeaderToggleBtn = styled.div`
@@ -33,6 +42,16 @@ const HeaderToggleBtn = styled.div`
     box-shadow: inset 4px -5px 2px rgba(0, 0, 0, 0.15),
       inset -4px -5px 2px rgba(0, 0, 0, 0.15);
   }
+  @media (max-width: 1024px) {
+    width: 85px;
+    height: 85px;
+    flex: 0 0 85px;
+  }
+  @media (max-width: 767px) {
+    width: 50px;
+    height: 50px;
+    flex: 0 0 50px;
+  }
 `;
 
 const ToggleIcon = styled.div`
@@ -46,8 +65,8 @@ const ToggleIcon = styled.div`
   &:after {
     position: absolute;
     content: "";
-    height: 7px;
-    width: 38px;
+    width: inherit;
+    height: inherit;
     background-color: inherit;
   }
   &:before {
@@ -55,6 +74,16 @@ const ToggleIcon = styled.div`
   }
   &:after {
     bottom: -13px;
+  }
+  @media (max-width: 767px) {
+    width: 25px;
+    height: 4px;
+    &:before {
+      top: -8px;
+    }
+    &:after {
+      bottom: -8px;
+    }
   }
 `;
 
@@ -66,6 +95,16 @@ const HeaderTitle = styled.h2`
   background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(5px 7px 0px #153147);
+  @media (max-width: 1024px) {
+    font-size: 60px;
+  }
+  @media (max-width: 767px) {
+    font-size: 40px;
+    max-width: 120px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 `;
 
 const GameStatus = styled.div`
@@ -82,6 +121,15 @@ const ProgressWrapper = styled.div`
   align-items: center;
   border-radius: 25px;
   background-color: ${({ theme }) => theme.white};
+  @media (max-width: 1024px) {
+    height: 28px;
+    width: 200px;
+    flex: 0 0 200px;
+  }
+  @media (max-width: 767px) {
+    width: 80px;
+    flex: 0 0 80px;
+  }
 `;
 
 const ProgressBar = styled.div<{ width?: number }>`
@@ -94,6 +142,11 @@ const ProgressBar = styled.div<{ width?: number }>`
 
 const Heart = styled.div`
   margin: 5px 0 0 15px;
+  svg {
+    @media (max-width: 767px) {
+      width: 40px;
+    }
+  }
 `;
 
 const MaskRect = styled.rect<{ height: number }>`

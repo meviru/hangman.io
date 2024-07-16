@@ -16,7 +16,6 @@ img {
 html,
 body {
     font-family: "Mouse Memoirs", sans-serif;
-    min-height: 100%;
     font-size: 20px;
     line-height: 1.2;
     font-weight: normal;

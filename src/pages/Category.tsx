@@ -53,7 +53,7 @@ const CategoryItem = styled(motion.li)`
   }
   @media (max-width: 767px) {
     height: 70px;
-    font-size: 35px;
+    font-size: 30px;
   }
 `;
 
