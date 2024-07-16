@@ -19,6 +19,7 @@ body {
     font-size: 20px;
     line-height: 1.2;
     font-weight: normal;
+    min-height: 100vh;
     color: ${({ theme }) => theme.lightText};
     background: url("${bgImage}") no-repeat top center/cover;
 }

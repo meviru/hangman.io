@@ -14,6 +14,9 @@ const Overlay = styled(motion.div)`
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.7);
+  @media (max-width: 767px) {
+    padding: 0 20px;
+  }
 `;
 
 const ModalContainer = styled(motion.div)`
@@ -28,6 +31,9 @@ const ModalContainer = styled(motion.div)`
     inset -4px -15px 2px rgba(0, 0, 0, 0.15),
     inset 4px -4px 2px ${({ theme }) => theme.darkBlue},
     inset -4px 4px 2px #4a64b5, 7px 7px 15px ${({ theme }) => theme.darkBlue};
+  @media (max-width: 767px) {
+    padding: 45px 20px;
+  }
 `;
 
 const Modal = ({ isOpen, onClose, children }: ModalProps) => {

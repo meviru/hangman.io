@@ -16,6 +16,9 @@ const Container = styled.div`
 const ModalTitle = styled.div`
   text-align: center;
   margin-top: -150px;
+  @media (max-width: 767px) {
+    margin-top: -110px;
+  }
 `;
 
 const ModalTitleText = styled.h2`
@@ -26,12 +29,18 @@ const ModalTitleText = styled.h2`
   background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(5px 7px 0px #153147);
+  @media (max-width: 767px) {
+    font-size: 80px;
+  }
 `;
 
 const ModalSubtitle = styled.h3`
   margin: 15px 0 30px;
   font-size: 35px;
   font-weight: normal;
+  @media (max-width: 767px) {
+    font-size: 25px;
+  }
 `;
 
 const ModalActions = styled.div`
@@ -40,6 +49,9 @@ const ModalActions = styled.div`
   margin-top: 20px;
   flex-direction: column;
   align-items: center;
+  @media (max-width: 767px) {
+    gap: 20px;
+  }
 `;
 
 const ActionButton = styled.button<{ color?: string }>`
@@ -65,6 +77,9 @@ const ActionButton = styled.button<{ color?: string }>`
     box-shadow: inset 0px -3px 2px rgba(255, 255, 255, 0.15),
       inset -0px -3px 2px rgba(255, 255, 255, 0.15),
       0 0 2px 3px ${({ theme }) => theme.darkBlue};
+  }
+  @media (max-width: 767px) {
+    font-size: 28px;
   }
 `;
 

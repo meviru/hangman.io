@@ -38,8 +38,8 @@ const LetterTile = styled.div`
     opacity: 0.4;
   }
   @media (max-width: 1024px) {
-    width: 78px;
-    height: 94px;
+    width: 75px;
+    height: 90px;
     font-size: 70px;
     border-radius: 30px;
   }
