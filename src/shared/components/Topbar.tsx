@@ -8,12 +8,21 @@ const TopbarWrapper = styled.header`
   align-items: center;
   padding: 64px 0 90px;
   justify-content: space-between;
+  @media (max-width: 1024px) {
+    padding: 54px 0 70px;
+  }
+  @media (max-width: 767px) {
+    padding: 44px 0 50px;
+  }
 `;
 
 const TopbarLeft = styled.div`
   display: flex;
   column-gap: 40px;
   align-items: center;
+  @media (max-width: 1024px) {
+    column-gap: 30px;
+  }
 `;
 
 const TopbarBtn = styled.div`
@@ -34,6 +43,17 @@ const TopbarBtn = styled.div`
     box-shadow: inset 4px -4px 2px rgba(0, 0, 0, 0.15),
       inset -4px -4px 2px rgba(0, 0, 0, 0.15);
   }
+
+  @media (max-width: 1024px) {
+    width: 85px;
+    height: 85px;
+    flex: 0 0 85px;
+  }
+  @media (max-width: 767px) {
+    width: 65px;
+    height: 65px;
+    flex: 0 0 65px;
+  }
 `;
 
 const TopbarIcon = styled.div`
@@ -43,6 +63,10 @@ const TopbarIcon = styled.div`
   color: ${({ theme }) => theme.white};
   filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.5));
   background: url(${iconBack}) no-repeat center center/contain;
+  @media (max-width: 767px) {
+    width: 32px;
+    height: 32px;
+  }
 `;
 
 const TopbarTitle = styled.div`
@@ -53,6 +77,13 @@ const TopbarTitle = styled.div`
   background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(5px 7px 0px #153147);
+
+  @media (max-width: 1024px) {
+    font-size: 60px;
+  }
+  @media (max-width: 767px) {
+    font-size: 45px;
+  }
 `;
 
 const Topbar = ({

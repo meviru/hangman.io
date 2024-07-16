@@ -13,6 +13,17 @@ const CategoryList = styled(motion.ul)`
   width: 100%;
   margin: 0 auto;
   grid-template-columns: repeat(4, 1fr);
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (max-width: 767px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 540px) {
+    gap: 25px;
+    margin-bottom: 25px;
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 
 const CategoryItem = styled(motion.li)`
@@ -39,6 +50,10 @@ const CategoryItem = styled(motion.li)`
     box-shadow: inset 0px -3px 2px rgba(255, 255, 255, 0.15),
       inset -0px -3px 2px rgba(255, 255, 255, 0.15),
       0 0 2px 3px ${({ theme }) => theme.darkBlue};
+  }
+  @media (max-width: 767px) {
+    height: 70px;
+    font-size: 35px;
   }
 `;
 
