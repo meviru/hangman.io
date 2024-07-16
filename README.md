@@ -43,3 +43,27 @@ To get started with Hangman.io, follow these steps:
 ![Guessing Screen](https://github.com/meviru/github-repo-assets/blob/main/hangman.io/screely-1720786711011.png)
 ![You Won Screen](https://github.com/meviru/github-repo-assets/blob/main/hangman.io/screely-1720786774500.png)
 ![Gameover Screen](https://github.com/meviru/github-repo-assets/blob/main/hangman.io/screely-1720786726681.png)
+
+## Technologies Used
+- **React**: A JavaScript library for building user interfaces.
+- **styled-components**: Utilized for writing CSS-in-JS for component styling.
+- **Framer Motion**: Used for smooth animations and transitions.
+
+## Contributing
+We welcome contributions from the community! If you'd like to contribute, please follow these steps:
+- Fork the repository.
+- Create a new branch for your feature or bugfix.
+```sh
+git checkout -b feature/your-feature-name
+```
+- Commit your changes.
+```sh
+git commit -m 'Add some feature'
+```
+- Push to the branch.
+```sh
+git push origin feature/your-feature-name
+```
+- Open a pull request.
+ 
+
