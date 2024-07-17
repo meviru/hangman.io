@@ -6,6 +6,7 @@ import { ICategory } from "../models";
 import getCategories from "../services/HangmanService";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
+import Skeleton from "../shared/components/Skeleton";
 
 const CategoryList = styled(motion.ul)`
   display: grid;
@@ -81,15 +82,19 @@ const itemVariants = {
 
 const Category = () => {
   const [categories, setCategories] = useState<ICategory[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
   useEffect(() => {
+    setIsLoading(true);
     getCategories()
       .then((response) => {
         setCategories(response);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error(error);
+        setIsLoading(false);
       });
   }, []);
 
@@ -105,28 +110,31 @@ const Category = () => {
     <>
       <Container>
         <Topbar title="Pick a Category" isBackBtnVisible={true} />
-        <CategoryList
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-        >
-          <AnimatePresence>
-            {categories &&
-              categories.length > 0 &&
-              categories.map((category, i) => (
-                <CategoryItem
-                  key={category.id}
-                  custom={i}
-                  initial="hidden"
-                  animate="visible"
-                  variants={itemVariants}
-                  onClick={() => redirectToGame(category.id, category.name)}
-                >
-                  {category.name}
-                </CategoryItem>
-              ))}
-          </AnimatePresence>
-        </CategoryList>
+        {isLoading && <Skeleton count={5} />}
+        {!isLoading && (
+          <CategoryList
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
+            <AnimatePresence>
+              {categories &&
+                categories.length > 0 &&
+                categories.map((category, i) => (
+                  <CategoryItem
+                    key={category.id}
+                    custom={i}
+                    initial="hidden"
+                    animate="visible"
+                    variants={itemVariants}
+                    onClick={() => redirectToGame(category.id, category.name)}
+                  >
+                    {category.name}
+                  </CategoryItem>
+                ))}
+            </AnimatePresence>
+          </CategoryList>
+        )}
       </Container>
     </>
   );

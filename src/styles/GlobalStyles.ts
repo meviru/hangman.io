@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle, keyframes } from "styled-components";
 import bgImage from "/mountains-starry-night.jpg";
 
 export const GlobalStyles = createGlobalStyle`
@@ -97,4 +97,13 @@ export const Container = styled.div`
   margin: 0 auto;
   padding: 0 20px;
   max-width: 1240px;
+`;
+
+export const SkeletonAnimation = keyframes`
+    0% {
+        background-position: -450px 0;
+    }
+    100% {
+        background-position: 450px 0;
+    }
 `;
