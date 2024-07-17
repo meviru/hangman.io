@@ -7,20 +7,24 @@ Welcome to **Hangman.io**, an interactive and fun digital version of the classic
 
 - [Features](#features)
 - [Installation](#installation)
+- [Technologies Used](#technologies-used)
 - [Usage](#usage)
 - [Screenshots](#screenshots)
-- [Technologies Used](#technologies-used)
 - [Contributing](#contributing)
 - [License](#license)
 
 ## Features
+- 🎮 Fun and interactive gameplay.
+- 🌟 Multiple categories to choose from.
+- 💡 Hints to assist you in guessing the word.
+- 🏆 Track your progress.
+- 📱 Responsive design for all devices.
 
-- **Multiple Categories**: Choose from various word categories to challenge your guessing skills.
-- **Interactive UI**: Enjoy a responsive and intuitive user interface with animated transitions.
-- **Progress Tracking**: Track your progress with a visually appealing progress bar and a heartometer.
-- **Mobile Friendly**: Play Hangman.io on any device, whether it's a desktop, tablet, or smartphone.
-
-## Installation
+## Technologies Used
+- ⚛️ React for frontend
+- 🚀 Node.js and Express for backend APIs
+- 💅 styled-components for component styling.
+- 🎬 Framer Motion for smooth animations and transitions.
 
 To get started with Hangman.io, follow these steps:
 
@@ -44,11 +48,6 @@ To get started with Hangman.io, follow these steps:
 ![You Won Screen](https://github.com/meviru/github-repo-assets/blob/main/hangman.io/screely-1720786774500.png)
 ![Gameover Screen](https://github.com/meviru/github-repo-assets/blob/main/hangman.io/screely-1720786726681.png)
 
-## Technologies Used
-- **React**: A JavaScript library for building user interfaces.
-- **styled-components**: Utilized for writing CSS-in-JS for component styling.
-- **Framer Motion**: Used for smooth animations and transitions.
-
 ## Contributing
 We welcome contributions from the community! If you'd like to contribute, please follow these steps:
 - Fork the repository.
@@ -67,5 +66,4 @@ git push origin feature/your-feature-name
 - Open a pull request.
  
 ## License
-This project is licensed under the MIT License. See the LICENSE file for more details.
-
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
