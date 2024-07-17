@@ -58,7 +58,7 @@ git checkout -b feature/your-feature-name
 ```
 - Commit your changes.
 ```sh
-git commit -m 'Add some feature'
+git commit -m 'feat: feature description'
 ```
 - Push to the branch.
 ```sh
@@ -66,4 +66,6 @@ git push origin feature/your-feature-name
 ```
 - Open a pull request.
  
+## License
+This project is licensed under the MIT License. See the LICENSE file for more details.
 
