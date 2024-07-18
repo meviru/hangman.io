@@ -107,7 +107,7 @@ const GameLayout = () => {
       return;
     }
     const randomIndex = Math.floor(Math.random() * array.length);
-    const selectedWord = array[randomIndex];
+    const selectedWord = atob(array[randomIndex]);
     setWord(selectedWord);
     getMissingLetters(selectedWord);
   }, []);
