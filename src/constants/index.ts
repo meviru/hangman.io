@@ -1,3 +1,3 @@
 export const CONSTANTS = {
-  API_URL: "http://localhost:3000",
+  API_URL: "https://api-hangman-io.vercel.app",
 };
