@@ -1,5 +1,6 @@
 <p align="center"><img alt="Hangman.io" src="https://raw.githubusercontent.com/meviru/github-repo-assets/main/hangman.io/logo.svg"></p>
-<img src="https://github.com/meviru/github-repo-assets/blob/main/hangman.io/screely-1720786674338.png" alt="Welcome Screen">
+<br/>
+<p align="center"><img src="https://github.com/meviru/github-repo-assets/blob/main/hangman.io/ezgif-3-d572f4d744.gif" alt="Welcome Screen"></p>
 
 Welcome to **Hangman.io**, an interactive and fun digital version of the classic Hangman game! This project brings the timeless word-guessing challenge to the modern web, offering an engaging experience for players of all ages.
 
